@@ -1,11 +1,24 @@
-const express = require("express");
+const express = require('express');
 
 const app = express();
 
-app.get("/", async (req, res) => {
+var CronJob = require('cron').CronJob;
+var job = new CronJob(
+  '00 50 23 * * *',
+  function () {
+    // console.log("test");
+    fetch('https://ivftpe.com/api/scheduler.php');
+  },
+  null,
+  true,
+  'Asia/Taipei'
+);
+job.start();
+
+app.get('/', async (req, res) => {
   return res.json({
     state: true,
-    message: "GCP API-Services Available",
+    message: 'GCP API-Services Available 2',
   });
 });
 
