@@ -18,10 +18,6 @@ var job = new CronJob(
     const d = new Date();
     console.log('Midnight Schedular run:', d);
     fetch('https://ivftpe.com/api/scheduler.php');
-    await webhook.send({
-      text: 'Midnight ivftpe Schedular run:',
-      d,
-    });
   },
   null,
   true,
@@ -37,9 +33,6 @@ app.get('/', async (req, res) => {
 });
 
 (async () => {
-  await webhook.send({
-    text: 'ivftpe server started.',
-  });
   console.log('start my node version');
   app.listen(process.env.PORT || 8080);
 })();
