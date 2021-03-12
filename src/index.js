@@ -6,7 +6,8 @@ var CronJob = require('cron').CronJob;
 var job = new CronJob(
   '00 50 23 * * *',
   function () {
-    console.log('test');
+    const d = new Date();
+    console.log('Midnight Schedular run:', d);
     fetch('https://ivftpe.com/api/scheduler.php');
   },
   null,
