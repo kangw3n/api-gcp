@@ -34,10 +34,15 @@ jobs:
       uses: actions/checkout@v2
 
     # Setup gcloud CLI
-    - uses: google-github-actions/setup-gcloud@master
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
+        version: '290.0.1'
         service_account_key: ${{ secrets.RUN_SA_KEY }}
         project_id: ${{ secrets.RUN_PROJECT }}
+
+    # deploy cron     
+    - name: Deploy Cron 
+      run: gcloud run deploy cron.yaml 
 
     # Build and push image to Google Container Registry
     - name: Build
@@ -54,5 +59,5 @@ jobs:
           --region "$RUN_REGION" \
           --image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA" \
           --platform "managed" \
-          --allow-unauthenticated 
-        gcloud run deploy cron.yaml
+          --allow-unauthenticated
+          
