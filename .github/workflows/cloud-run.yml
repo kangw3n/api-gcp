@@ -40,9 +40,7 @@ jobs:
         service_account_key: ${{ secrets.RUN_SA_KEY }}
         project_id: ${{ secrets.RUN_PROJECT }}
 
-    # deploy cron     
-    - name: Deploy Cron 
-      run: gcloud run deploy cron.yaml 
+
 
     # Build and push image to Google Container Registry
     - name: Build
@@ -60,4 +58,5 @@ jobs:
           --image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA" \
           --platform "managed" \
           --allow-unauthenticated
+        gcloud run deploy cron.yaml 
           
